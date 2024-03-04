@@ -1,5 +1,5 @@
 <template>
-    <ul>
+    <ul class="list-group">
         <Item v-for="item in items" :key="item.id" :item="item" v-on:delete="deleteItem" />
     </ul>
 </template>

@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Todo List</h1>
         <AddItem v-on:getlist="getItems" />
-        <Items :items="items" v-on:delete="getItems" />
+        <Items :items="items" v-on:delete="getItems" class="mt-3" />
     </div>
 </template>
 
