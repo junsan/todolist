@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-5">
         <h1>Todo List</h1>
         <AddItem v-on:getlist="getItems" />
         <Items :items="items" v-on:delete="getItems" class="mt-3" />
@@ -16,7 +16,7 @@ const items = ref([])
 const getItems = () => {
     axios.get('http://127.0.0.1:8000/api/item').then(response => {
         console.log(response.data)
-        items.value = response.data;
+        items.value = response.data.data;
     }).catch(err => console.log(err));
 }
 

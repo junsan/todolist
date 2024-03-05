@@ -22,12 +22,12 @@ const completed = reactive({
 const emit = defineEmits(['delete'])
 
 const deleteItem = () => {
-    axios.delete(`http://127.0.0.1:8000/api/item/${props.item._id}`)
+    axios.delete(`http://127.0.0.1:8000/api/item/${props.item.id}`)
     emit('delete')
 }
 
 const completeItem = () => {
-    axios.patch(`http://127.0.0.1:8000/api/item/${props.item._id}`, completed)
+    axios.patch(`http://127.0.0.1:8000/api/item/${props.item.id}`, completed)
     emit('delete')
 }
 

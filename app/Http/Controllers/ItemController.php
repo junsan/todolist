@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use Illuminate\Support\Carbon;
+use App\Http\Resources\ItemResource;
+use App\Http\Requests\ItemRequest;
 
 class ItemController extends Controller
 {
@@ -13,7 +15,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return Item::orderBy('created_at', 'DESC')->get();
+        return ItemResource::collection(Item::orderBy('created_at', 'DESC')->get());
     }
 
     /**
@@ -27,13 +29,15 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
-        $newItem = new Item;
-        $newItem->name = $request->name;
-        $newItem->save();
+        // $newItem = new Item;
+        // $newItem->name = $request->name;
+        // $newItem->save();
 
-        return $newItem;
+        $newItem = Item::create($request->validated());
+
+        return ItemResource::make($newItem);
     }
 
     /**
@@ -61,7 +65,7 @@ class ItemController extends Controller
         $item->completed_at = Carbon::now();
         $item->save();
 
-        return 'Item updated successfully.';
+        return ItemResource::make($item);
     }
 
     /**
